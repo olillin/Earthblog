@@ -15,8 +15,12 @@ try {
  * null if the request failed. All values in `$values` are bound using `bindValue`
  * with the `:` prefix.
  */
-function queryDB(string $query, array $values): ?array
+function queryDB(string $query, ?array $values = null): ?array
 {
+    if ($values === null) {
+        $values = array();
+    }
+
     global $dbc;
     if (!isset($dbc)) {
         throw new IllegalStateException('There is no database connection');
