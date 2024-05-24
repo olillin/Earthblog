@@ -26,13 +26,13 @@
     // Get input
     $bloggtext = $_POST['bloggtext'];
     $sanitized = trim($bloggtext);
-    $userId = $_SESSION['user'];
+    $authorId = $_SESSION['user'];
     $datetime = date("Y-m-d H:i:s");
     // Post to DB
     $result = queryDB(
         'INSERT INTO bloggtext (userId, bloggtext, datetime) VALUES (:userId, :bloggtext, :datetime)',
         array(
-            'userId' => $userId,
+            'userId' => $authorId,
             'bloggtext' => urlencode($bloggtext),
             'datetime' => $datetime,
         )

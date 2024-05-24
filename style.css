@@ -7,6 +7,10 @@
     display: block;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 /* Blogposts */
 .blogPost {
     border: 1px solid lightgray;

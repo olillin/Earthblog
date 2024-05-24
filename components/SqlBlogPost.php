@@ -2,13 +2,7 @@
 $datetime = Prop('row')['datetime'];
 
 // Get user full name
-$userId = Prop('row')['userId'];
-$userResult = queryDB('SELECT userFullName FROM users WHERE userId=:userId', array('userId' => $userId));
-if ($userResult === null || empty($userResult)) {
-    $userFullName = 'Okänd användare';
-} else {
-    $userFullName = $userResult[0]['userFullName'];
-}
+$authorId = Prop('row')['userId'];
 
 $parsedown = new Parsedown();
 $bloggtext = urldecode(Prop('row')['bloggtext']);
@@ -18,7 +12,8 @@ $bloggbody = $parsedown->text($sanitizedBloggtext);
 echo Component(
     'BlogPost',
     text: $bloggbody,
-    author: $userFullName,
+    authorId: $authorId,
     datetime: $datetime,
-    myPost: Prop('myPost', $userId === $_SESSION['user']),
+    myPost: Prop('myPost', $authorId === $_SESSION['user']),
+    profileLink: Prop('profileLink', true),
 );

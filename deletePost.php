@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <title>Radera inlägg</title>
-    <?= require_once 'config.php' ?>
+    <?php require_once 'config.php' ?>
 </head>
 
 <body>
@@ -21,11 +21,11 @@
         die();
     }
     $datetime = $_GET['datetime'];
-    $userId = $_SESSION['user'];
+    $authorId = $_SESSION['user'];
     $result = queryDB(
         'SELECT * FROM bloggtext WHERE userId=:userId AND datetime=:datetime',
         array(
-            'userId' => $userId,
+            'userId' => $authorId,
             'datetime' => $datetime,
         )
     );
@@ -51,6 +51,7 @@
                 'SqlBlogPost',
                 row: $bloggpost,
                 myPost: false,
+                profileLink: false,
             ) ?>
             <input type="hidden" name="datetime" value="<?= $datetime ?>">
             <button type="submit">Ja, radera det</button>
