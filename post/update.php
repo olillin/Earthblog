@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raderar inlägg</title>
+    <title>Uppdaterar inlägg</title>
     <link rel="stylesheet" href="/style.css">
     <?php require_once '../config.php' ?>
 </head>
@@ -23,8 +23,17 @@
         ERROR;
         die();
     }
+    if (!isset($_POST['bloggtext']) || empty($_POST['bloggtext'])) {
+        echo <<<ERROR
+        <span class="error">Du kan inte skapa ett tomt blogginlägg.</span>
+
+        <a href="/blogg.php">Tillbaka till hemskärmen</a>
+        ERROR;
+        die();
+    }
     // Get input
     $datetime = $_POST['datetime'];
+    $bloggtext = $_POST['bloggtext'];
     // Check how many bloggposts match
     $count = queryDB(
         'SELECT COUNT(*) FROM bloggtext WHERE datetime=:datetime',
@@ -42,19 +51,20 @@
     } else {
         if ($count[0]['COUNT(*)'] != 1) {
             echo <<<ERROR
-            <span class="error">Detta inlägg går inte att radera.</span>
+            <span class="error">Detta inlägg går inte att uppdatera.</span>
 
             <a href="/blogg.php">Tillbaka till hemskärmen</a>
             ERROR;
         } else {
             $result = queryDB(
-                'DELETE FROM bloggtext WHERE datetime=:datetime',
+                'UPDATE bloggtext SET bloggtext=:bloggtext WHERE datetime=:datetime',
                 array(
+                    'bloggtext' => $bloggtext,
                     'datetime' => $datetime,
                 )
             );
             if ($result === null) {
-                // Failed deletion
+                // Failed update
                 echo <<<ERROR
                 <span class="error">Något gick fel, försök igen senare.</span>
 
@@ -62,7 +72,7 @@
                 ERROR;
             } else {
                 echo <<<SUCCESS
-                <span class="success">Raderade blogginlägg, omdirigerar till hemskärmen...</span>
+                <span class="success">Uppdaterade blogginlägg, omdirigerar till hemskärmen...</span>
 
                 <a href="/blogg.php">Omdirigeras inte automatiskt? Klicka här</a>
                 SUCCESS;

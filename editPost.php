@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
-    <title>Radera inlägg</title>
-    <?= require_once 'config.php' ?>
+    <title>Redigera inlägg</title>
+    <?= require_once './config.php' ?>
 </head>
 
 <body>
-    <?php require_once './checkLogin.php' ?>
-
     <?php
+    require_once './checkLogin.php';
+
     if (!isset($_GET['datetime'])) {
         echo <<<ERROR
         <span class="error">Inget blogginlägg har valts.</span>
@@ -42,19 +42,19 @@
         die();
     }
     $bloggpost = $result[0];
+    $bloggtext = $bloggpost['bloggtext'];
     ?>
     <main>
-        <h1>Radera inlägg</h1>
-        <form action="/post/delete.php" method="POST">
-            <p>Är du säker att du vill radera detta inlägg?</p>
+        <h1>Redigera inlägg</h1>
+        <form action="/post/update.php" method="POST">
             <?= Component(
-                'SqlBlogPost',
-                row: $bloggpost,
-                myPost: false,
+                'Blogtext',
+                value: $bloggtext,
+                placeholder: $bloggtext,
             ) ?>
             <input type="hidden" name="datetime" value="<?= $datetime ?>">
-            <button type="submit">Ja, radera det</button>
-            <a href="/blogg.php">Nej, gå tillbaka</a>
+            <button type="submit">Spara</button>
+            <a href="/blogg.php">Avbryt</a>
         </form>
     </main>
 </body>

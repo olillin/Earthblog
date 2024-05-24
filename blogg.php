@@ -8,7 +8,6 @@
     <title>Blogg</title>
     <link rel="stylesheet" href="/style.css">
     <?php require_once './config.php' ?>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
@@ -20,37 +19,11 @@
         <h1>Välkommen till bloggen!</h1>
 
         <div class="feed">
-            <div class="tabs">
-                <span id="tabHeader">
-                    <a class="tabButton" href="">Skriv</a>
-                    <a class="tabButton" href="">Förhandsgranska</a>
-                </span>
-
-                <div id="tabs">
-                    <div class="tab">
-                        <h2>Nytt blogginlägg</h2>
-                        <form id="createBlog" action="/post/create.php" method="POST">
-                            <div id="bloggtext">
-                                <textarea name="bloggtext"
-                                          id="bloggtextarea"
-                                          placeholder="Idag har jag..."></textarea>
-                                <span id="markdownNotice" hidden>
-                                    Blogginlägg på denna sida stödjer
-                                    <a href="https://sv.wikipedia.org/wiki/Markdown" tabindex="0">markdown</a>
-                                </span>
-                            </div>
-
-                            <button type="submit">Publicera</button>
-                        </form>
-                    </div>
-                    <div class="tab">
-                        <div id="markdownPreview" class="markdown">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script src="/markdownPreview.js"></script>
+            <form id="createBlog" action="/post/create.php" method="POST">
+                <h2>Nytt blogginlägg</h2>
+                <?= Component('Blogtext') ?>
+                <button type="submit">Publicera</button>
+            </form>
 
             <ul id="feed">
                 <?php

@@ -32,18 +32,3 @@ function refreshMarkdownPreview() {
     const parsed = marked.parse(bloggtextarea.value)
     markdownPreview.innerHTML = parsed
 }
-
-// Markdown notice
-const notice = document.getElementById('markdownNotice')
-const bloggtext = document.getElementById('bloggtext')
-bloggtext.addEventListener('focusin', () => {
-    console.log('focus')
-    notice.hidden = false
-})
-bloggtext.addEventListener('focusout', () => {
-    setTimeout(() => {
-        if (!bloggtext.contains(document.activeElement)) {
-            notice.hidden = true
-        }
-    }, 0)
-})
