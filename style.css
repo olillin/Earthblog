@@ -17,6 +17,7 @@ a {
 }
 
 .blogButtons a {
+    display: inline-block;
     width: fit-content;
     height: fit-content;
 }

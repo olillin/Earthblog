@@ -17,6 +17,8 @@
     if (!isset($_GET['datetime'])) {
         echo <<<ERROR
         <span class="error">Inget blogginlägg har valts.</span>
+
+        <a href="/blogg.php">Tillbaka till hemskärmen</a>
         ERROR;
         die();
     }
@@ -32,12 +34,16 @@
     if ($result === null) {
         echo <<<ERROR
         <span class="error">Något gick fel, försök igen senare.</span>
+
+        <a href="/blogg.php">Tillbaka till hemskärmen</a>
         ERROR;
         die();
     }
     if (count($result) != 1) {
         echo <<<ERROR
         <span class="error">Detta inlägg går inte att radera.</span>
+
+        <a href="/blogg.php">Tillbaka till hemskärmen</a>
         ERROR;
         die();
     }

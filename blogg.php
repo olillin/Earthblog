@@ -19,11 +19,7 @@
         <h1>Välkommen till bloggen!</h1>
 
         <div class="feed">
-            <form id="createBlog" action="/post/create.php" method="POST">
-                <h2>Nytt blogginlägg</h2>
-                <?= Component('Blogtext') ?>
-                <button type="submit">Publicera</button>
-            </form>
+            <?= Component('CreateBlogPostForm') ?>
 
             <ul id="feed">
                 <?php
