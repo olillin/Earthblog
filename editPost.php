@@ -49,7 +49,7 @@
         <form action="/post/update.php" method="POST">
             <?= Component(
                 'Blogtext',
-                value: $bloggtext,
+                value: urldecode($bloggtext),
                 placeholder: $bloggtext,
             ) ?>
             <input type="hidden" name="datetime" value="<?= $datetime ?>">

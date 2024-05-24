@@ -11,7 +11,7 @@ if ($userResult === null || empty($userResult)) {
 }
 
 $parsedown = new Parsedown();
-$bloggtext = Prop('row')['bloggtext'];
+$bloggtext = urldecode(Prop('row')['bloggtext']);
 $sanitizedBloggtext = htmlspecialchars($bloggtext);
 $bloggbody = $parsedown->text($sanitizedBloggtext);
 

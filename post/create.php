@@ -33,7 +33,7 @@
         'INSERT INTO bloggtext (userId, bloggtext, datetime) VALUES (:userId, :bloggtext, :datetime)',
         array(
             'userId' => $userId,
-            'bloggtext' => $bloggtext,
+            'bloggtext' => urlencode($bloggtext),
             'datetime' => $datetime,
         )
     );

@@ -59,7 +59,7 @@
             $result = queryDB(
                 'UPDATE bloggtext SET bloggtext=:bloggtext WHERE datetime=:datetime',
                 array(
-                    'bloggtext' => $bloggtext,
+                    'bloggtext' => urlencode($bloggtext),
                     'datetime' => $datetime,
                 )
             );
