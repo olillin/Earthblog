@@ -1,0 +1,17 @@
+:root {
+    --color-error: #ff5f5f;
+}
+
+.error {
+    color: var(--color-error);
+    display: block;
+}
+
+.bloggButtons a {
+    width: fit-content;
+    height: fit-content;
+}
+.bloggButtons img {
+    width: 32px;
+    height: 32px;
+}

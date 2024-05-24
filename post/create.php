@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nytt inlägg</title>
-    <?php require_once './config.php' ?>
+    <link rel="stylesheet" href="/style.css">
+    <?php require_once '../config.php' ?>
 </head>
 
 <body>
     <?php
-    require_once './checkLogin.php';
+    require_once '../checkLogin.php';
 
     // Validate input
     if (!isset($_POST['bloggtext']) || empty($_POST['bloggtext'])) {
@@ -24,7 +25,7 @@
     }
     // Get input
     $bloggtext = $_POST['bloggtext'];
-    $sanitized = trim(htmlspecialchars($bloggtext));
+    $sanitized = trim($bloggtext);
     $userId = $_SESSION['user'];
     $datetime = date("Y-m-d H:i:s");
     // Post to DB

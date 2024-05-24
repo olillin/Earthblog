@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blogg</title>
+    <link rel="stylesheet" href="/style.css">
     <?php require_once './config.php' ?>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -28,7 +29,7 @@
                 <div id="tabs">
                     <div class="tab">
                         <h2>Nytt blogginlägg</h2>
-                        <form id="createBlogg" action="/createBlogg.php" method="POST">
+                        <form id="createBlog" action="/post/create.php" method="POST">
                             <textarea name="bloggtext" id="bloggtext" placeholder="Idag har jag..."></textarea>
                             <span id="markdownNotice" hidden>
                                 Blogginlägg på denna sida stödjer
@@ -57,29 +58,10 @@
                     ERROR;
                 } else {
                     foreach ($result as $row) {
-                        $bloggtext = $row['bloggtext'];
-
-                        // Format datetime
-                        $datetime = $row['datetime'];
-
-                        $prettyDatetime = date("h:i d/m/Y", strtotime($datetime));
-
-                        // Get user full name
-                        $userId = $row['userId'];
-                        $userResult = queryDB('SELECT userFullName FROM users WHERE userId=:userId', array('userId' => $userId));
-                        if ($userResult === null || empty($userResult)) {
-                            $userFullName = 'Okänd användare';
-                        } else {
-                            $userFullName = $userResult[0]['userFullName'];
-                        }
-
-                        $parsedown = new Parsedown();
-                        $bloggbody = $parsedown->text($bloggtext);
-                        echo "<li class=\"bloggMessage\">
-                            <p>$bloggbody</p>
-                            <span class=\"author\">$userFullName</span>
-                            <time datetime=\"$datetime\">$prettyDatetime</time>
-                            </li>";
+                        echo '<li>' . Component(
+                            'SqlBlogPost',
+                            row: $row
+                        ) . '</li>';
                     }
                 }
                 ?>
