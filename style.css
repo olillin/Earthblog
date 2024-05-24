@@ -7,11 +7,21 @@
     display: block;
 }
 
-.bloggButtons a {
+/* Blogposts */
+.blogPost {
+    border: 1px solid lightgray;
+}
+
+.blogButtons a {
     width: fit-content;
     height: fit-content;
 }
-.bloggButtons img {
+.blogButtons img {
     width: 32px;
     height: 32px;
+}
+
+/* New blogpost form */
+#bloggtext > *:not([hidden]) {
+    display: block;
 }

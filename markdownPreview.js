@@ -5,7 +5,6 @@ const tabs = document.querySelectorAll('#tabs > .tab')
 switchToTab(0)
 
 for (let i = 0; i < tabHeaderButtons.length; i++) {
-    console.log(tabHeaderButtons[i])
     tabHeaderButtons[i].addEventListener('click', ev => {
         ev.preventDefault()
         switchToTab(i)
@@ -26,10 +25,25 @@ function switchToTab(tabIndex) {
 }
 
 // Preview markdown
-const bloggtext = document.getElementById('bloggtext')
+const bloggtextarea = document.getElementById('bloggtextarea')
 const markdownPreview = document.getElementById('markdownPreview')
 
 function refreshMarkdownPreview() {
-    const parsed = marked.parse(bloggtext.value)
+    const parsed = marked.parse(bloggtextarea.value)
     markdownPreview.innerHTML = parsed
 }
+
+// Markdown notice
+const notice = document.getElementById('markdownNotice')
+const bloggtext = document.getElementById('bloggtext')
+bloggtext.addEventListener('focusin', () => {
+    console.log('focus')
+    notice.hidden = false
+})
+bloggtext.addEventListener('focusout', () => {
+    setTimeout(() => {
+        if (!bloggtext.contains(document.activeElement)) {
+            notice.hidden = true
+        }
+    }, 0)
+})

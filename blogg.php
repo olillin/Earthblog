@@ -13,10 +13,10 @@
 
 <body>
     <?php require_once './checkLogin.php' ?>
+    <header class="w-100 pad-left__s pad-right__s pad-up__s pad-down__s">
+        <a href="/logout.php" class="right-0 bg-">Logga ut</a>
+    </header>
     <main>
-        <header class="w-100 pad-left__s pad-right__s pad-up__s pad-down__s">
-            <a href="/logout.php" class="right-0 bg-">Logga ut</a>
-        </header>
         <h1>Välkommen till bloggen!</h1>
 
         <div class="feed">
@@ -30,11 +30,15 @@
                     <div class="tab">
                         <h2>Nytt blogginlägg</h2>
                         <form id="createBlog" action="/post/create.php" method="POST">
-                            <textarea name="bloggtext" id="bloggtext" placeholder="Idag har jag..."></textarea>
-                            <span id="markdownNotice" hidden>
-                                Blogginlägg på denna sida stödjer
-                                <a href="https://sv.wikipedia.org/wiki/Markdown">markdown</a>
-                            </span>
+                            <div id="bloggtext">
+                                <textarea name="bloggtext"
+                                          id="bloggtextarea"
+                                          placeholder="Idag har jag..."></textarea>
+                                <span id="markdownNotice" hidden>
+                                    Blogginlägg på denna sida stödjer
+                                    <a href="https://sv.wikipedia.org/wiki/Markdown" tabindex="0">markdown</a>
+                                </span>
+                            </div>
 
                             <button type="submit">Publicera</button>
                         </form>
