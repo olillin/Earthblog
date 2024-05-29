@@ -1,19 +1,9 @@
 // Tabs
-const tabHeaderButtons = document.querySelectorAll('#tabHeader > .tabButton')
-const tabs = document.querySelectorAll('#tabs > .tab')
-
-switchToTab(0)
-
-for (let i = 0; i < tabHeaderButtons.length; i++) {
-    tabHeaderButtons[i].addEventListener('click', ev => {
-        ev.preventDefault()
-        switchToTab(i)
-    })
-}
+const tabpanels = document.querySelectorAll('#tabpanels > [role=tabpanel]')
 
 /** @param {number} tabIndex The tab to change to */
 function switchToTab(tabIndex) {
-    tabs.forEach((tab, i) => {
+    tabpanels.forEach((tab, i) => {
         let hidden = i !== tabIndex
         tab.hidden = hidden
         tab.ariaHidden = hidden
@@ -23,6 +13,7 @@ function switchToTab(tabIndex) {
         refreshMarkdownPreview()
     }
 }
+switchToTab(0)
 
 // Preview markdown
 const bloggtextarea = document.getElementById('bloggtextarea')

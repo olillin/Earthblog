@@ -7,14 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blogg</title>
     <link rel="stylesheet" href="/style.css">
-    <?php require_once './config.php' ?>
+    <?php require_once './phpDefaults.php' ?>
 </head>
 
 <body>
     <?php require_once './checkLogin.php' ?>
-    <header class="w-100 pad-left__s pad-right__s pad-up__s pad-down__s">
-        <a href="/logout.php" class="right-0 bg-">Logga ut</a>
-    </header>
+
+    <?= Component('Header') ?>
     <main>
         <h1>Välkommen till bloggen!</h1>
 

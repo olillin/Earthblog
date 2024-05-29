@@ -12,7 +12,7 @@ function Component(string $_component_name, ...$_props): string
     global $_passedProps;
     $_passedProps = $_props;
     ob_start();
-    include COMPONENTS_DIR . $_component_name . '.php';
+    include __DIR__ . '/../' . COMPONENTS_DIR . $_component_name . '.php';
     return ob_get_clean();
 }
 

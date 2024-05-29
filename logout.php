@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Du loggas ut...</title>
     <link rel="stylesheet" href="/style.css">
-    <?php require_once './config.php' ?>
+    <?php require_once './phpDefaults.php' ?>
 </head>
 
 <body>

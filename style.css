@@ -25,8 +25,3 @@ a {
     width: 32px;
     height: 32px;
 }
-
-/* New blogpost form */
-#bloggtext > *:not([hidden]) {
-    display: block;
-}

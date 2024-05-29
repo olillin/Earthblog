@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
     <title>Redigera inlägg</title>
-    <?php require_once './config.php' ?>
+    <link rel="stylesheet" href="/style.css">
+    <?php require_once './phpDefaults.php' ?>
 </head>
 
 <body>
-    <?php
-    require_once './checkLogin.php';
+    <?php require_once './checkLogin.php' ?>
 
+    <?= Component('Header') ?>
+    <?php
     if (!isset($_GET['datetime'])) {
         echo <<<ERROR
         <span class="error">Inget blogginlägg har valts.</span>

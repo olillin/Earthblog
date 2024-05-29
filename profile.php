@@ -1,5 +1,5 @@
 <?php
-require_once './config.php';
+require_once './phpDefaults.php';
 
 if (!isset($_GET['id'])) {
     $error = 'Ingen användare har valts.';
@@ -24,7 +24,6 @@ if (!isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
     <title><?php
     if (isset($profileName)) {
         echo $profileName;
@@ -32,12 +31,14 @@ if (!isset($_GET['id'])) {
         echo 'Profilen finns inte';
     }
     ?></title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
-    <?php
-    require_once './checkLogin.php';
+    <?php require_once './checkLogin.php' ?>
 
+    <?= Component('Header') ?>
+    <?php
     if (isset($error)) {
         echo <<<ERROR
         <span class="error">$error</span>

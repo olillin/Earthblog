@@ -1,6 +1,4 @@
 <?php
-// Liftkit
-require_once __DIR__ . '/lib/chainlift-liftkit/liftkit.php';
 // Components
 define("COMPONENTS_DIR", "components/");
 include_once __DIR__ . '/lib/component-helper.php';
@@ -8,3 +6,4 @@ include_once __DIR__ . '/lib/component-helper.php';
 require_once __DIR__ . '/lib/db-helper.php';
 // ParseDown
 require_once __DIR__ . '/lib/Parsedown.php';
+?>

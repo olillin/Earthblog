@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logga in — Blogg</title>
     <link rel="stylesheet" href="/style.css">
-    <?php require_once './config.php' ?>
+    <?php require_once './phpDefaults.php' ?>
 </head>
 
-<body class="flex flex-col items-center justify-center w-screen h-screen">
-    <h1 class="m-bottom__m">Logga in</h1>
-    <form action="/login.php" method="POST">
-        <?= Component('LoginInput', id: "username", label: "Användarnamn") ?>
+<body>
+    <h1>Logga in</h1>
+    <form action="/post/login.php" method="POST">
+        <?= Component('LoginInput', id: "username", type: "text", label: "Användarnamn") ?>
         <?= Component('LoginInput', id: "password", type: "password", label: "Lösenord") ?>
 
         <button class="primary" type="submit">Logga in</button>

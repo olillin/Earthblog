@@ -1,10 +1,10 @@
 <div class="tabs">
-    <span id="tabHeader">
-        <button class="tabButton">Skriv</button>
-        <button class="tabButton">Förhandsgranska</button>
+    <span id="tablist" role="tablist">
+        <button role="tab" type="button" onclick="switchToTab(0)">Skriv</button>
+        <button role="tab" type="button" onclick="switchToTab(1)">Förhandsgranska</button>
     </span>
-    <div id="tabs">
-        <div id="bloggtext" class="tab">
+    <div id="tabpanels">
+        <div role="tabpanel">
             <textarea name="bloggtext"
                       id="bloggtextarea"
                       placeholder="<?= Prop('placeholder', 'Idag har jag...') ?>"><?= Prop('value') ?></textarea>
@@ -13,7 +13,7 @@
                 <a href="https://sv.wikipedia.org/wiki/Markdown" tabindex="0">markdown</a>
             </span>
         </div>
-        <div class="tab">
+        <div role="tabpanel">
             <div id="markdownPreview" class="markdown">
 
             </div>

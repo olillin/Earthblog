@@ -1,4 +1,4 @@
-# EarthBlog ⛰️
+# Earthblog ⛰️
 
 ## Setup
 
