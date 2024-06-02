@@ -5,25 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logga in — Earthblog</title>
+    <title>Registrera — Earthblog</title>
     <link rel="stylesheet" href="/style/common.css">
     <?php require_once './phpDefaults.php' ?>
 </head>
 
 <body>
     <main>
-        <p>Välkommen tillbaka till</p>
+        <p>Välkommen till</p>
         <span class="logo big">Earthblog ⛰️</span>
-        <h1>Logga in</h1>
-        <form action="/post/login.php" method="POST">
+        <h1>Skapa konto</h1>
+        <form action="/post/register.php" method="POST">
+            <?= Component('LabeledInput', id: "fullName", type: "text", label: "Ditt namn") ?>
             <?= Component('LabeledInput', id: "username", type: "text", label: "Användarnamn") ?>
             <?= Component('LabeledInput', id: "password", type: "password", label: "Lösenord") ?>
 
             <span class="row center">
-                <button class="button primary" type="submit">Logga in</button>
+                <button class="button primary" type="submit">Registrera</button>
             </span>
         </form>
-        <span class="notice">Har du inget konto? <a href="/register.php">Klicka här</a></span>
+        <span class="notice">Har du redan ett konto? <a href="/">Klicka här</a></span>
     </main>
 
     <?= Component('Footer') ?>

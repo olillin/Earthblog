@@ -10,7 +10,7 @@ if (!isset($_GET['id'])) {
     } else if (count($result) > 1) {
         $error = 'Fick ogiltigt svar från databas, flera användare.';
     } else {
-        $profileName = $result[0]['userFullName'];
+        $profileName = htmlspecialchars(urldecode($result[0]['userFullName']));
     }
 }
 ?>

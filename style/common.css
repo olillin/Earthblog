@@ -188,6 +188,10 @@ main > a.button {
     margin-bottom: var(--xs);
 }
 
+.notice {
+    margin-top: var(--l);
+}
+
 /* Logo */
 a:has(.logo) {
     text-decoration: none;

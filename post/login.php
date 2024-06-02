@@ -18,7 +18,7 @@
         } else if (!isset($_POST['password']) || empty($_POST['password'])) {
             echo Component('LoginError', message: 'Du har inte angett ett lösenord');
         } else {
-            $username = $_POST['username'];
+            $username = strtolower($_POST['username']);
             $password = $_POST['password'];
 
             $rows = queryDB(

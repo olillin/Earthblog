@@ -14,7 +14,7 @@ $result = queryDB('SELECT userFullName FROM users WHERE userId=:authorId', array
 if ($result === null || empty($result)) {
     $author = 'Okänd användare';
 } else {
-    $author = $result[0]['userFullName'];
+    $author = htmlspecialchars(urldecode($result[0]['userFullName']));
 }
 // Get profile picture
 $profilePicture = Component('ProfilePicture', name: $author);

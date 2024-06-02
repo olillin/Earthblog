@@ -18,7 +18,7 @@
             );
 
             if ($result !== null) {
-                $userFullName = $result[0]['userFullName'];
+                $userFullName = htmlspecialchars(urldecode($result[0]['userFullName']));
                 $profilePicture = Component('ProfilePicture', name: $userFullName);
                 echo "<span>Inloggad som<br>$profilePicture<span class=\"loggedInUser\">$userFullName</span></span>";
             }

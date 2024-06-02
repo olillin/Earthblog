@@ -27,7 +27,7 @@
                     if ($result === null || empty($result)) {
                         $author = 'Okänd användare';
                     } else {
-                        $author = $result[0]['userFullName'];
+                        $author = htmlspecialchars(urldecode($result[0]['userFullName']));
                     }
                     $profilePicture = Component('ProfilePicture', name: $author);
 

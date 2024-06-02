@@ -32,27 +32,25 @@
             if ($count === null) {
                 // Failed check
                 echo Component('Error', message: 'Något gick fel, försök igen senare.');
+            } else if ($count[0]['COUNT(*)'] != 1) {
+                echo Component('Error', message: 'Detta inlägg går inte att radera.');
             } else {
-                if ($count[0]['COUNT(*)'] != 1) {
-                    echo Component('Error', message: 'Detta inlägg går inte att radera.');
+                $result = queryDB(
+                    'DELETE FROM bloggtext WHERE datetime=:datetime',
+                    array(
+                        'datetime' => $datetime,
+                    )
+                );
+                if ($result === null) {
+                    // Failed deletion
+                    echo Component('Error', message: 'Något gick fel, försök igen senare.');
                 } else {
-                    $result = queryDB(
-                        'DELETE FROM bloggtext WHERE datetime=:datetime',
-                        array(
-                            'datetime' => $datetime,
-                        )
-                    );
-                    if ($result === null) {
-                        // Failed deletion
-                        echo Component('Error', message: 'Något gick fel, försök igen senare.');
-                    } else {
-                        echo <<<SUCCESS
+                    echo <<<SUCCESS
                     <span class="success">Raderade blogginlägg, omdirigerar till hemskärmen...</span>
     
                     <a href="/blogg.php" class="button primary">Omdirigeras inte automatiskt? Klicka här</a>
                     SUCCESS;
-                        header('Location: /blogg.php');
-                    }
+                    header('Location: /blogg.php');
                 }
             }
         }

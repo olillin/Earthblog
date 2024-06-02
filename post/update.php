@@ -17,7 +17,7 @@
 
         // Validate input
         if (!isset($_POST['datetime']) || empty($_POST['datetime'])) {
-            echo Component('Error', message: 'Du har inte valt något blogginlägg');
+            echo Component('Error', message: 'Du har inte valt något blogginlägg.');
         } else if (!isset($_POST['bloggtext']) || empty($_POST['bloggtext'])) {
             echo Component('Error', message: 'Du kan inte skapa ett tomt blogginlägg.');
         } else {

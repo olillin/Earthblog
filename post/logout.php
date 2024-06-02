@@ -15,7 +15,7 @@
     session_start();
     session_unset();
     session_destroy();
-    header('Location: /index.php');
+    header('Location: /');
     ?>
     <main>
         <h1>Du har loggats ut</h1>
