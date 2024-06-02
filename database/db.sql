@@ -21,19 +21,19 @@ CREATE TABLE IF NOT EXISTS bloggtext (
 
 -- Create user entries
 INSERT IGNORE INTO users (userFullName, loginName, password) VALUES(
-    "Oliver Lindell",
+    "Oliver+Lindell",
     "oli",
     "abc123!"
 );
 
 INSERT IGNORE INTO users (userFullName, loginName, password) VALUES(
-    "Salar Asker Zada",
+    "Salar+Asker+Zada",
     "salar",
     "sakertlosen456!"
 );
 
 INSERT INTO bloggtext (userId, bloggtext, datetime, author) VALUES(
     1,
-    "# Välkommen till bloggen!\nTest ny rad",
-    "2024-05-04 21:11:00"
+    "# Välkommen till bloggen!\nHoppas du tycker om markdown.",
+    "2024-06-02 04:23:00"
 );
