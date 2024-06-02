@@ -7,7 +7,8 @@ try {
         'abc123!'
     );
 } catch (PDOException $exception) {
-    throw new AuthorizationException('Misslyckades att ansluta till databas: ' . $exception->getMessage());
+    echo '<p class="error">Misslyckades att ansluta till databas: ' . $exception->getMessage() . '</p>';
+    die();
 }
 
 /**
