@@ -17,7 +17,7 @@ if (!empty(Prop('name')) && Prop('name') !== 'Okänd användare') {
         'N' => '🍜',
         'O' => '🧀',
         'P' => '🌴',
-        'Q' => '❔',
+        'Q' => '🦆',
         'R' => '🌹',
         'S' => '🌞',
         'T' => '🐯',
@@ -31,6 +31,10 @@ if (!empty(Prop('name')) && Prop('name') !== 'Okänd användare') {
         'Ä' => '👼',
         'Ö' => '🦎',
     );
-    $emoji = $emojis[strtoupper(Prop('name')[0])];
+    if (isset($emojis[strtoupper(Prop('name')[0])])) {
+        $emoji = $emojis[strtoupper(Prop('name')[0])];
+    } else {
+        $emoji = '❔';
+    }
     echo "<span class=\"profilePicture\">$emoji</span>";
 }
