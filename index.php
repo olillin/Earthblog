@@ -5,19 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logga in — Blogg</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Logga in — Earthblog</title>
+    <link rel="stylesheet" href="/style/common.css">
     <?php require_once './phpDefaults.php' ?>
 </head>
 
 <body>
-    <h1>Logga in</h1>
-    <form action="/post/login.php" method="POST">
-        <?= Component('LoginInput', id: "username", type: "text", label: "Användarnamn") ?>
-        <?= Component('LoginInput', id: "password", type: "password", label: "Lösenord") ?>
+    <main>
+        <p>Välkommen till</p>
+        <span class="logo big">Earthblog ⛰️</span>
+        <h1>Logga in</h1>
+        <form action="/post/login.php" method="POST">
+            <?= Component('LabeledInput', id: "username", type: "text", label: "Användarnamn") ?>
+            <?= Component('LabeledInput', id: "password", type: "password", label: "Lösenord") ?>
 
-        <button class="primary" type="submit">Logga in</button>
-    </form>
+            <span class="row center">
+                <button class="button primary" type="submit">Logga in</button>
+            </span>
+        </form>
+    </main>
+
+    <?= Component('Footer') ?>
 </body>
 
 </html>

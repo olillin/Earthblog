@@ -6,71 +6,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raderar inlägg</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style/common.css">
     <?php require_once '../phpDefaults.php' ?>
 </head>
 
 <body>
-    <?php
-    require_once '../checkLogin.php';
+    <main>
 
-    // Validate input
-    if (!isset($_POST['datetime']) || empty($_POST['datetime'])) {
-        echo <<<ERROR
-        <span class="error">Du har inte valt något blogginlägg.</span>
+        <?php
+        require_once '../checkLogin.php';
 
-        <a href="/blogg.php">Tillbaka till hemskärmen</a>
-        ERROR;
-        die();
-    }
-    // Get input
-    $datetime = $_POST['datetime'];
-    // Check how many bloggposts match
-    $count = queryDB(
-        'SELECT COUNT(*) FROM bloggtext WHERE datetime=:datetime',
-        array(
-            'datetime' => $datetime,
-        )
-    );
-    if ($count === null) {
-        // Failed check
-        echo <<<ERROR
-        <span class="error">Något gick fel, försök igen senare.</span>
-
-        <a href="/blogg.php">Tillbaka till hemskärmen</a>
-        ERROR;
-    } else {
-        if ($count[0]['COUNT(*)'] != 1) {
-            echo <<<ERROR
-            <span class="error">Detta inlägg går inte att radera.</span>
-
-            <a href="/blogg.php">Tillbaka till hemskärmen</a>
-            ERROR;
+        // Validate input
+        if (!isset($_POST['datetime']) || empty($_POST['datetime'])) {
+            echo Component('Error', message: 'Du har inte valt något blogginlägg.');
         } else {
-            $result = queryDB(
-                'DELETE FROM bloggtext WHERE datetime=:datetime',
+            // Get input
+            $datetime = $_POST['datetime'];
+            // Check how many bloggposts match
+            $count = queryDB(
+                'SELECT COUNT(*) FROM bloggtext WHERE datetime=:datetime',
                 array(
                     'datetime' => $datetime,
                 )
             );
-            if ($result === null) {
-                // Failed deletion
-                echo <<<ERROR
-                <span class="error">Något gick fel, försök igen senare.</span>
-
-                <a href="/blogg.php">Tillbaka till hemskärmen</a>
-                ERROR;
+            if ($count === null) {
+                // Failed check
+                echo Component('Error', message: 'Något gick fel, försök igen senare.');
             } else {
-                echo <<<SUCCESS
-                <span class="success">Raderade blogginlägg, omdirigerar till hemskärmen...</span>
-
-                <a href="/blogg.php">Omdirigeras inte automatiskt? Klicka här</a>
-                SUCCESS;
-                header('Location: ' . '/blogg.php');
+                if ($count[0]['COUNT(*)'] != 1) {
+                    echo Component('Error', message: 'Detta inlägg går inte att radera.');
+                } else {
+                    $result = queryDB(
+                        'DELETE FROM bloggtext WHERE datetime=:datetime',
+                        array(
+                            'datetime' => $datetime,
+                        )
+                    );
+                    if ($result === null) {
+                        // Failed deletion
+                        echo Component('Error', message: 'Något gick fel, försök igen senare.');
+                    } else {
+                        echo <<<SUCCESS
+                    <span class="success">Raderade blogginlägg, omdirigerar till hemskärmen...</span>
+    
+                    <a href="/blogg.php" class="button primary">Omdirigeras inte automatiskt? Klicka här</a>
+                    SUCCESS;
+                        header('Location: /blogg.php');
+                    }
+                }
             }
         }
-    }
-    ?>
+        ?>
+    </main>
+
+    <?= Component('Footer') ?>
 </body>
 
 </html>

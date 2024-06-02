@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogg</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Earthblog</title>
+    <link rel="stylesheet" href="/style/common.css">
+    <link rel="stylesheet" href="/style/blogg.css">
     <?php require_once './phpDefaults.php' ?>
 </head>
 
@@ -15,31 +16,31 @@
 
     <?= Component('Header') ?>
     <main>
-        <h1>Välkommen till bloggen!</h1>
+        <h1>Välkommen till Earthblog!</h1>
 
-        <div class="feed">
-            <?= Component('CreateBlogPostForm') ?>
+        <?= Component('CreateBlogPostForm', authorId: $_SESSION['user']) ?>
 
-            <ul id="feed">
-                <?php
-                $result = queryDB("SELECT * FROM bloggtext ORDER BY datetime DESC");
+        <ul id="feed" class="feed">
+            <?php
+            $result = queryDB("SELECT * FROM bloggtext ORDER BY datetime DESC");
 
-                if ($result === null) {
-                    echo <<<ERROR
-                    <span class="error">Det gick inte att ladda in flödet, försök igen senare.</span>
-                    ERROR;
-                } else {
-                    foreach ($result as $row) {
-                        echo '<li>' . Component(
-                            'SqlBlogPost',
-                            row: $row
-                        ) . '</li>';
-                    }
+            if ($result === null) {
+                echo <<<ERROR
+                <span class="error">Det gick inte att ladda in flödet, försök igen senare.</span>
+                ERROR;
+            } else {
+                foreach ($result as $row) {
+                    echo '<li>' . Component(
+                        'SqlBlogPost',
+                        row: $row
+                    ) . '</li>';
                 }
-                ?>
-            </ul>
-        </div>
+            }
+            ?>
+        </ul>
     </main>
+
+    <?= Component('Footer') ?>
 </body>
 
 </html>

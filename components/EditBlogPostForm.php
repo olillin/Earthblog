@@ -1,5 +1,4 @@
-<form id="createBlog" class="createBlog" action="/post/create.php" method="POST">
-    <h2>Nytt blogginlägg</h2>
+<form id="createBlog" class="createBlog" action="/post/update.php" method="POST">
     <div class="tabs">
         <span id="tablist" role="tablist" class="row start">
             <button role="tab" type="button" onclick="switchToTab(0)" class="selected">Skriv</button>
@@ -20,7 +19,7 @@
                 <div class="blogPost">
                     <?php
                     // Format datetime
-                    $datetime = date("Y-m-d H:i:s");
+                    $datetime = Prop('datetime');
                     $prettyDatetime = date("H:i d/m/Y", strtotime($datetime));
 
                     // Get author name
@@ -42,8 +41,10 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="datetime" value="<?= $datetime ?>">
             <span class="buttonRow">
-                <button type="submit" class="button primary">Publicera</button>
+                <button type="submit" class="button primary">Spara</button>
+                <a href="/blogg.php" class="button">Avbryt</a>
             </span>
         </div>
     </div>

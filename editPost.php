@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redigera inlägg</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style/common.css">
+    <link rel="stylesheet" href="/style/blogg.css">
     <?php require_once './phpDefaults.php' ?>
 </head>
 
@@ -14,50 +15,39 @@
     <?php require_once './checkLogin.php' ?>
 
     <?= Component('Header') ?>
-    <?php
-    if (!isset($_GET['datetime'])) {
-        echo <<<ERROR
-        <span class="error">Inget blogginlägg har valts.</span>
-        ERROR;
-        die();
-    }
-    $datetime = $_GET['datetime'];
-    $authorId = $_SESSION['user'];
-    $result = queryDB(
-        'SELECT * FROM bloggtext WHERE userId=:userId AND datetime=:datetime',
-        array(
-            'userId' => $authorId,
-            'datetime' => $datetime,
-        )
-    );
-    if ($result === null) {
-        echo <<<ERROR
-        <span class="error">Något gick fel, försök igen senare.</span>
-        ERROR;
-        die();
-    }
-    if (count($result) != 1) {
-        echo <<<ERROR
-        <span class="error">Detta inlägg går inte att radera.</span>
-        ERROR;
-        die();
-    }
-    $bloggpost = $result[0];
-    $bloggtext = $bloggpost['bloggtext'];
-    ?>
     <main>
+        <?php
+        if (!isset($_GET['datetime'])) {
+            echo Component('Error', message: 'Inget blogginlägg har valts.');
+        }
+        $datetime = $_GET['datetime'];
+        $authorId = $_SESSION['user'];
+        $result = queryDB(
+            'SELECT * FROM bloggtext WHERE userId=:userId AND datetime=:datetime',
+            array(
+                'userId' => $authorId,
+                'datetime' => $datetime,
+            )
+        );
+        if ($result === null) {
+            echo Component('Error', message: 'Något gick fel, försök igen senare.');
+        }
+        if (count($result) != 1) {
+            echo Component('Error', message: 'Detta inlägg går inte att redigera.');
+        }
+        $bloggpost = $result[0];
+        $bloggtext = $bloggpost['bloggtext'];
+        ?>
         <h1>Redigera inlägg</h1>
-        <form action="/post/update.php" method="POST">
-            <?= Component(
-                'Blogtext',
-                value: urldecode($bloggtext),
-                placeholder: $bloggtext,
-            ) ?>
-            <input type="hidden" name="datetime" value="<?= $datetime ?>">
-            <button type="submit">Spara</button>
-            <a href="/blogg.php">Avbryt</a>
-        </form>
+        <?= Component(
+            'EditBlogPostForm',
+            text: urldecode($bloggtext),
+            placeholder: urldecode($bloggtext),
+            datetime: $datetime,
+        ) ?>
     </main>
+
+    <?= Component('Footer') ?>
 </body>
 
 </html>
